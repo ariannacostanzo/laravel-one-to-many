@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
@@ -21,7 +22,8 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::orderByDesc('updated_at')->orderByDesc('created_at')->get();
-        return view('admin.projects.index', compact('projects'));
+        $types = Type::select('label', 'id')->get();
+        return view('admin.projects.index', compact('projects', 'types'));
     }
 
     /**
@@ -30,7 +32,8 @@ class ProjectController extends Controller
     public function create()
     {
         $project = new Project();
-        return view('admin.projects.create', compact('project'));
+        $types = Type::select('label', 'id')->get();
+        return view('admin.projects.create', compact('project', 'types'));
     }
 
     /**

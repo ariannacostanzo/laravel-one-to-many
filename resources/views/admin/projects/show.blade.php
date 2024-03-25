@@ -6,7 +6,12 @@
 
 @include('includes.projects.modal')
 
-<h1>{{ $project->title }}</h1>
+<div class="d-flex justify-content-between align-items-center">
+    <h1>{{ $project->title }}</h1> 
+    @if($project->type)
+    <span class="badge rounded-pill" style="background-color: {{$project->type->color}}">{{$project->type->label}}</span>
+    @endif 
+</div>
 <hr>
 <div class="row">
     <div class="col-3">

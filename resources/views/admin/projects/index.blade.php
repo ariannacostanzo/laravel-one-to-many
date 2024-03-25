@@ -17,6 +17,7 @@
             <th scope="col">Titolo</th>
             <th scope="col">Creato</th>
             <th scope="col">Modificato</th>
+            <th scope="col">Tipo</th>
             <th>
                 <div class="d-flex justify-content-end gap-3">
                     <a href="{{route('admin.projects.trash')}}" class="btn btn-secondary">
@@ -40,6 +41,13 @@
                 <td>{{ $project->getDate($project->created_at) }}</td>
                 <td>{{ $project->getDate($project->updated_at) }}</td>
                 <td>
+                    @if($project->type)
+                        <span class="badge rounded-pill" style="background-color: {{$project->type->color}}">{{$project->type->label}}</span>
+                    @else 
+                        Nessuno
+                    @endif
+                </td>
+                <td>
                     <div class="d-flex justify-content-end gap-3">
                         <a href="{{ route('admin.projects.show', $project->id) }}" class="btn btn-primary"><i
                                 class="fa-regular fa-eye"></i></a>
@@ -54,10 +62,11 @@
 
                     </div>
                 </td>
+                
             </tr>
         @empty
             <tr>
-                <td colspan="5">Non ci sono progetti da vedere</td>
+                <td colspan="6">Non ci sono progetti da vedere</td>
             </tr>
         @endforelse
 
