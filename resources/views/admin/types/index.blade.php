@@ -16,6 +16,14 @@
             <th scope="col">Etichetta</th>
             <th scope="col">Creato</th>
             <th scope="col">Modificato</th>
+            <th>
+                <div class="d-flex justify-content-end gap-3">
+                    <a href="{{ route('admin.types.create') }}" class="btn btn-success">
+                        <i class="fa-solid fa-plus me-2"></i>
+                        Crea nuovo
+                    </a>
+                </div>
+            </th>
         </tr>
     </thead>
     <tbody>

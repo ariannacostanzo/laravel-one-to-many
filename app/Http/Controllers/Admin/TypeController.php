@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class TypeController extends Controller
 {
@@ -30,7 +31,26 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'label' => 'required|string|unique:types',
+            'color' => 'nullable|hex_color',
+            
+        ], [
+            'label.required' => 'Inserisci l\'etichetta del tipo',
+            'color.hex_color' => 'Il formato del colore non è corretto',
+            
+        ]);
+
+        $data = $request->all();
+        
+        $type = new Type();
+
+        $type->fill($data);
+        $type->save();
+
+        return to_route('admin.types.show', $type->id)
+            ->with('message', "Tipo '$type->label' creato con successo!")
+            ->with('type', "success");
     }
 
     /**
@@ -54,7 +74,23 @@ class TypeController extends Controller
      */
     public function update(Request $request, Type $type)
     {
-        //
+        $request->validate([
+            'label' =>
+            ['required', 'string', Rule::unique('types')->ignore($type->id)],
+            'color' => 'nullable|hex_color',
+
+        ], [
+            'label.required' => 'Inserisci l\'etichetta del tipo',
+            'color.hex_color' => 'Il formato del colore non è corretto',
+
+        ]);
+
+        $data = $request->all();
+        $type->update($data);
+
+        return to_route('admin.types.show', $type->id)
+            ->with('message', "Tipo '$type->label' modificato con successo!")
+            ->with('type', "info");
     }
 
     /**
