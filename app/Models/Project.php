@@ -14,6 +14,12 @@ class Project extends Model
 
     protected $fillable = ['title', 'description', 'slug'];
 
+    //lego project a type
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
+
     public function getAbstract() {
         $abstract = substr($this->description, 0, 50) . '...';
         return $abstract;
