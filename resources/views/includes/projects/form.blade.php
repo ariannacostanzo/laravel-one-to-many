@@ -26,17 +26,31 @@
             <input type="text" class="form-control" id="slug" disabled>
         </div>
     </div>
-    <div class="col-6">
+    <div class="col-12">
         <div class="mb-3">
             <label for="description" class="form-label">Descrizione</label>
             <textarea class="form-control @error('description') is-invalid @elseif(old('description', '')) is-valid @enderror"
-                id="description" name="description" rows="10">{{ old('description', $project->description) }}</textarea>
+                id="description" name="description" rows="8">{{ old('description', $project->description) }}</textarea>
             @error('description')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
             @enderror
         </div>
+    </div>
+    <div class="col-6">
+        <label for="type_id" class="form-label">Tipo</label>
+        <select class="form-select @error('type_id') is-invalid @elseif(old('type_id', '')) is-valid @enderror" name="type_id">
+            <option value="" @if(old('type_id', $project->type?->id) == '') selected @endif>Nessuno</option>
+            @foreach ($types as $type)
+            <option value="{{$type->id}}" @if(old('type_id', $project->type?->id) == $type->id) selected @endif>{{$type->label}}</option>
+            @endforeach
+        </select>
+        @error('type_id')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+        @enderror
     </div>
     <div class="col-5">
         <div class="mb-3">
@@ -46,12 +60,13 @@
                 id="image" name="image">
 
             @if ($project->exists)
-            <div class="input-group mb-3" id="change-img-container">
-                <button class="btn btn-outline-secondary" type="button" id="change-img-button" >Cambia immagine</button>
-                <input type="text" class="form-control" disabled value="{{old('image', $project->image)}}">
-            </div>
+                <div class="input-group mb-3" id="change-img-container">
+                    <button class="btn btn-outline-secondary" type="button" id="change-img-button">Cambia
+                        immagine</button>
+                    <input type="text" class="form-control" disabled value="{{ old('image', $project->image) }}">
+                </div>
             @endif
-            
+
             @error('image')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -61,7 +76,8 @@
     </div>
     <div class="col-1">
         <div class="mb-3">
-            <img src=" {{old('image', $project->image) ? $project->getImagePath() : 'https://bub.bh/wp-content/uploads/2018/02/image-placeholder.jpg' }}" id="preview" class="img-fluid">
+            <img src=" {{ old('image', $project->image) ? $project->getImagePath() : 'https://bub.bh/wp-content/uploads/2018/02/image-placeholder.jpg' }}"
+                id="preview" class="img-fluid">
         </div>
     </div>
     <div class="col-6"></div>

@@ -22,7 +22,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::orderByDesc('updated_at')->orderByDesc('created_at')->get();
-        $types = Type::select('label', 'id')->get();
+        $types = Type::all();
         return view('admin.projects.index', compact('projects', 'types'));
     }
 
@@ -46,10 +46,12 @@ class ProjectController extends Controller
             'title' => 'required|string|unique:projects',
             'description' => 'required|string',
             'image' => 'nullable|image',
+            'type_id' => 'nullable|exists:types,id'
         ], [
             'title.required' => 'Inserisci il titolo del progetto',
             'description.required' => 'Inserisci la descrizione del progetto',
             'image.image' => 'Il formato immagine non è corretto',
+            'type_id.exist' => 'Il tipo non è corretto',
         ]);
 
         $data = $request->all();
@@ -80,8 +82,8 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-
-        return view('admin.projects.show', compact('project'));
+        $types = Type::all();
+        return view('admin.projects.show', compact('project', 'types'));
     }
 
     /**
@@ -89,7 +91,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        $types = Type::select('label', 'id')->get();
+        return view('admin.projects.edit', compact('project', 'types'));
     }
 
     /**
@@ -101,10 +104,12 @@ class ProjectController extends Controller
             'title' => ['required', 'string', Rule::unique('projects')->ignore($project->id)],
             'description' => 'required|string',
             'image' => 'nullable|image',
+            'type_id' => 'nullable|exists:types,id'
         ], [
             'title.required' => 'Inserisci il titolo del progetto',
             'description.required' => 'Inserisci la descrizione del progetto',
             'image.url' => 'Il formato immagine non è corretto',
+            'type_id.exist' => 'Il tipo non è corretto',
         ]);
 
         $data = $request->all();

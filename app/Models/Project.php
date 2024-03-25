@@ -12,7 +12,7 @@ class Project extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['title', 'description', 'slug'];
+    protected $fillable = ['title', 'description', 'slug', 'type_id'];
 
     //lego project a type
     public function type()
@@ -28,13 +28,6 @@ class Project extends Model
     public function getDate($date, $format = 'd-m-Y') {
         return Carbon::create($date)->format($format);
     }
-
-    //rende il caricamento delle pagine troppo lento
-    // public function isValidImage() {
-    //     $imageInfo = @getimagesize($this->image);
-    //     $isValidImage = $imageInfo !== false;
-    //     return $isValidImage;
-    // }
 
     public function getImagePath() {
         return asset('storage/' . $this->image);
