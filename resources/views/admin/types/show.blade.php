@@ -11,14 +11,11 @@
 </div>
 <hr>
 <div class="row">
-    <div class="col-2">
+    <div class="col d-flex align-items-center gap-3">
         <strong>
             Colore: 
         </strong>
-        <span class="p-2 rounded" style="background-color: {{$type->color}}">{{ $type->label }}</span>
-    </div>
-    <div class="col">
-        <strong>Descrizione:</strong>
+        <div class="p-2 rounded display-color" style="background-color: {{$type->color}}"></div>
     </div>
 </div>
 <div class="row my-5">
@@ -32,7 +29,7 @@
                     class="fa-solid fa-pen me-2"></i>Modifica</a>
                     {{-- todo modifica del model --}}
             <form action="{{ route('admin.types.destroy', $type->id) }}" method="POST" class="delete-form"
-                data-bs-toggle="modal" data-bs-target="#delete-modal" data-type="{{ $type->title }}">
+                data-bs-toggle="modal" data-bs-target="#delete-modal" data-type="{{ $type->label }}">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-danger"><i class="fa-regular fa-trash-can me-2"></i>Elimina</button>

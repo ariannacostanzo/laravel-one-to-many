@@ -54,10 +54,14 @@
             </tr>
         @empty
             <tr>
-                <td colspan="5">Non ci sono progetti da vedere</td>
+                <td colspan="5">Non ci sono tipi da vedere</td>
             </tr>
         @endforelse
 
     </tbody>
 </table>
+@endsection
+
+@section('scripts')
+@vite('resources/js/modal.js')
 @endsection

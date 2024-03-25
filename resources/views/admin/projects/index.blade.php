@@ -42,7 +42,10 @@
                 <td>{{ $project->getDate($project->updated_at) }}</td>
                 <td>
                     @if($project->type)
-                        <span class="badge rounded-pill" style="background-color: {{$project->type->color}}">{{$project->type->label}}</span>
+                        <span class="badge rounded-pill" style="background-color: {{$project->type->color}}">
+                            {{-- <a href="{{route('admin.types.show', $project->type->id)}}"></a> --}}
+                            {{$project->type->label}}
+                        </span>
                     @else 
                         Nessuno
                     @endif

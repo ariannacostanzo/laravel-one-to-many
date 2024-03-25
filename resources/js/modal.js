@@ -10,7 +10,13 @@ deleteForms.forEach((form) => {
     form.addEventListener('submit', (e) => {
         e.preventDefault()
         const projectTitle = form.getAttribute('data-project')
-        modalText.innerText = projectTitle;
+        const typeLabel = form.getAttribute('data-type')
+        if (projectTitle) {
+            modalText.innerText = projectTitle + "?";
+        }
+        if (typeLabel) {
+            modalText.innerText = typeLabel + '?';
+        }
         modalConfirmButton.addEventListener("click", () => { //e questo si toglie
             form.submit();
         });

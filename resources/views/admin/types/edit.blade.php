@@ -23,7 +23,7 @@
                 id="color" name="color" value="{{ old('color', $type->color) }}">
         </div>
         <div class="col d-flex justify-content-end ">
-                <button class="btn btn-success"><i class="fa-solid fa-floppy-disc me-2"></i>Salva</button>
+                <button class="btn btn-success"><i class="fa-solid fa-floppy-disk me-2"></i>Salva</button>
         </div>
     </div>
 
