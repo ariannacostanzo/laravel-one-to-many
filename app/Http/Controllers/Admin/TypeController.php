@@ -104,3 +104,5 @@ class TypeController extends Controller
         ->with('type', "danger");
     }
 }
+
+// todo cestino

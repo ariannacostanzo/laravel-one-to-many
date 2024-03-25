@@ -32,7 +32,8 @@
                 </div>
             @enderror
         </div>
-        <div class="col d-flex justify-content-end ">
+        <div class="col d-flex justify-content-end gap-3">
+            <a class="btn btn-primary" href="{{route('admin.types.index')}}"><i class="fa-solid fa-arrow-left me-2"></i>Torna alla lista</a>
             <button class="btn btn-success"><i class="fa-solid fa-plus me-2"></i>Crea</button>
         </div>
     </div>

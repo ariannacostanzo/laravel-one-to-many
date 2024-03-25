@@ -22,7 +22,8 @@
                 class="form-control @error('color') is-invalid @elseif(old('color', '')) is-valid  @enderror"
                 id="color" name="color" value="{{ old('color', $type->color) }}">
         </div>
-        <div class="col d-flex justify-content-end ">
+        <div class="col d-flex justify-content-end gap-3">
+                <a class="btn btn-primary" href="{{route('admin.types.show', $type->id)}}"><i class="fa-solid fa-arrow-left me-2"></i>Torna indietro</a>
                 <button class="btn btn-success"><i class="fa-solid fa-floppy-disk me-2"></i>Salva</button>
         </div>
     </div>
